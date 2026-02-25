@@ -1,35 +1,48 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+
+import React, { useState } from 'react';
+import Login from './Login';
+import Signup from './Signup';
+import './App.css';
+
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [page, setPage] = useState<'login' | 'signup'>('login');
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+      <div style={{ display: 'flex', justifyContent: 'center', marginTop: 24, gap: 16 }}>
+        <button
+          style={{
+            padding: '0.5rem 1.2rem',
+            borderRadius: 6,
+            border: 'none',
+            background: page === 'login' ? '#7c3aed' : '#ddd',
+            color: page === 'login' ? '#fff' : '#333',
+            cursor: 'pointer',
+            fontWeight: 500
+          }}
+          onClick={() => setPage('login')}
+        >
+          Login
         </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+        <button
+          style={{
+            padding: '0.5rem 1.2rem',
+            borderRadius: 6,
+            border: 'none',
+            background: page === 'signup' ? '#7c3aed' : '#ddd',
+            color: page === 'signup' ? '#fff' : '#333',
+            cursor: 'pointer',
+            fontWeight: 500
+          }}
+          onClick={() => setPage('signup')}
+        >
+          Sign Up
+        </button>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      {page === 'login' ? <Login /> : <Signup />}
     </>
-  )
+  );
 }
 
 export default App
